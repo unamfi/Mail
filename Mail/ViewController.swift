@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var correos = [["remitente":"mm.dracos@gmail.com","asunto":"curso Swift","contenido":"estamos haciendo una app para iphone"]]
+    var correos = [["remitente":"mm.dracos@gmail.com","asunto":"curso Swift","contenido":"estamos haciendo una app para iphone"],["remitente":"mm.dracos@gmail.com","asunto":"curso Swift","contenido":"estamos haciendo una app para iphone"],["remitente":"mm.dracos@gmail.com","asunto":"curso Swift","contenido":"estamos haciendo una app para iphone"],["remitente":"mm.dracos@gmail.com","asunto":"curso Swift","contenido":"estamos haciendo una app para iphone"],["remitente":"mm.dracos@gmail.com","asunto":"curso Swift","contenido":"estamos haciendo una app para iphone"],["remitente":"mm.dracos@gmail.com","asunto":"curso Swift","contenido":"estamos haciendo una app para iphone"],["remitente":"mm.dracos@gmail.com","asunto":"curso Swift","contenido":"estamos haciendo una app para iphone"]]
     
     
     override func viewDidLoad() {
@@ -37,7 +37,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
     }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .default, title: "Borrar") { (action, indexPath) in
+            self.correos.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        let shareAction = UITableViewRowAction(style: .default, title: "Compartir") { (action, indexPath) in
+            let deafultText = "Estamos en el ios lab"
+            let shareActivity = UIActivityViewController(activityItems: [deafultText], applicationActivities: [])
+            self.present(shareActivity, animated: true, completion: nil)
+        }
+        
+        shareAction.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        return [deleteAction,shareAction]
+    }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
